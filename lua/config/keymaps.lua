@@ -28,3 +28,7 @@ keymap("n", "<C-l>", "<C-w>l", opts) -- 光标去右边窗口
 -- 5. 取消搜索高亮
 -- 搜索完之后那些高亮很烦人，按 "空格 + nh" (no highlight) 清除
 keymap("n", "<Leader>nh", ":nohl<CR>", opts)
+
+-- 6. 分屏快捷键
+keymap("n", "<Leader>sv", "<C-w>v", opts) -- Space + sv (Split Vertical) 左右分屏
+keymap("n", "<Leader>sh", "<C-w>s", opts) -- Space + sh (Split Horizontal) 上下分屏
