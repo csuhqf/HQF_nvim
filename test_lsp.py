@@ -1,2 +1,6 @@
 import os
-print(os.path.abspath("."))
+import sys
+
+
+def ugly_function(x, y):
+    print("hello")
