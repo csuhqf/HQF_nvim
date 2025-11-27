@@ -32,14 +32,8 @@ return {
 
                     -- 特殊处理程序：针对 lua_ls 需要特殊配置
                     ["lua_ls"] = function()
-                        require("lspconfig").lua_ls.setup({
-                            settings = {
-                                Lua = {
-                                    diagnostics = { globals = { "vim" } },
-                                },
-                            },
-                        })
-                    end,
+                        require("lspconfig").lua_ls.setup({})
+                   end,
                 }
             })
 
