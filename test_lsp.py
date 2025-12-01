@@ -3,7 +3,7 @@ import sys
 
 
 def ugly_function(x, y):
-    print("hello")
+    print(f"hello {x} and {y}")
 
 
 def another_ugly_function(a, b):

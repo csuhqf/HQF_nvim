@@ -17,3 +17,7 @@ vim.opt.cursorline = true -- 高亮当前行
 
 -- 保持光标上下保留10行（光标不要贴顶或底）
 vim.opt.scrolloff = 10
+
+-- 分屏行为设置
+vim.opt.splitright = true -- 垂直分屏时，新窗口在右侧 (像 VSCode)
+vim.opt.splitbelow = true -- 水平分屏时，新窗口在下方
