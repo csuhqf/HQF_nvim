@@ -11,7 +11,6 @@ local opts = { noremap = true, silent = true }
 -- 在插入模式下，快速按 jk 两个键，直接退出到普通模式
 -- 彻底解放你的小拇指，不用再去够左上角的 Esc
 keymap("i", "jk", "<Esc>", opts)
-keymap("s", "jk", "<Esc>", opts) -- 适用于选择模式
 
 -- 3. 快速保存与退出
 -- 按 "空格 + w" 保存
