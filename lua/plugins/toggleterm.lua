@@ -87,10 +87,60 @@ return {
 				end
 			end
 
+			-- E. 智能查看变量 (全能版)
+			-- 自动识别: 矩阵(看Shape) / 列表(看Length) / 数值(看Value)
+			function _G._smart_inspect_variable()
+				local ft = vim.bo.filetype
+				if ft == "python" then
+					if not ipython:is_open() then
+						ipython:open()
+					end
+
+					-- 获取光标下的单词 (变量名)
+					local var = vim.fn.expand("<cword>")
+
+					-- === 核心魔法 ===
+					-- 构建一段 Python 代码，利用 hasattr 进行类型嗅探
+					-- 逻辑：
+					-- 1. 如果有 .shape (是矩阵/DataFrame): 看形状、类型、极值
+					-- 2. 如果有 .__len__ (是列表/字典): 看长度、预览内容
+					-- 3. 其他情况 (数字/字符): 直接看值
+					local command = string.format(
+						"print(f'\\n🔍 INSPECT: %s <{type(%s).__name__}>'); "
+							.. "print(f'   Shape: {%s.shape}\\n   Dtype: {%s.dtype}\\n   Range: [{%s.min()}, {%s.max()}]') if hasattr(%s, 'shape') else "
+							.. "print(f'   Length: {len(%s)}\\n   Content: {str(%s)[:200]}...') if hasattr(%s, '__len__') and not isinstance(%s, (str, int, float)) else "
+							.. "print(f'   Value: {%s}')",
+						var,
+						var, -- 标题
+						var,
+						var,
+						var,
+						var,
+						var, -- 情况1: 矩阵
+						var,
+						var,
+						var,
+						var, -- 情况2: 列表/字典
+						var -- 情况3: 普通数值
+					)
+
+					-- 发送给 IPython
+					ipython:send(command .. "\r")
+				else
+					print("只支持 Python 文件")
+				end
+			end
+
 			-- === 4. 快捷键 ===
 			vim.keymap.set("n", "<Leader>t", "<cmd>lua _smart_toggle()<CR>", { noremap = true, silent = true })
 			vim.keymap.set("v", "<Leader>s", "<cmd>lua _smart_send_visual()<CR>", { noremap = true, silent = true })
 			vim.keymap.set("n", "<Leader>s", "<cmd>lua _smart_send_line()<CR>", { noremap = true, silent = true })
+			vim.keymap.set(
+				"n",
+				"<Leader>i",
+				"<cmd>lua _smart_inspect_variable()<CR>",
+				{ noremap = true, silent = true }
+			)
 
 			-- 终端防卡死键位
 			function _G.set_terminal_keymaps()
