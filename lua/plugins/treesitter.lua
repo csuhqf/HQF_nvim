@@ -31,7 +31,10 @@ return {
 				},
 
 				-- 启用基于 Treesitter 的缩进 (对 Python 很有用)
-				indent = { enable = true },
+				indent = {
+					enable = true,
+					disable = { "html" }, -- 如果你发现缩进有问题，可以在这里禁用
+				},
 			})
 		end,
 	},
