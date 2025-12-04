@@ -62,6 +62,11 @@ return {
 			vim.keymap.set("n", "<Leader>cm", function()
 				require("CopilotChat").select_model()
 			end, { desc = "Select Copilot Model" })
+			-- 6. 重置聊天 (清空记忆): Space + cr (Chat Reset)
+			vim.keymap.set("n", "<Leader>cr", function()
+				require("CopilotChat").reset()
+				print("Copilot 记忆已重置")
+			end, { desc = "Reset Copilot Chat" })
 		end,
 	},
 }
