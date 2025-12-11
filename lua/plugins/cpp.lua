@@ -1,13 +1,22 @@
 return {
-	-- 1. Clangd 增强扩展 (内存布局、AST、类型提示)
+	-- 1. Clangd 增强扩展
 	{
 		"p00f/clangd_extensions.nvim",
 		lazy = true,
+		-- 【关键修复】告诉它：只要打开 c 或 cpp 文件，立刻醒来！
+		ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 		config = function()
 			require("clangd_extensions").setup({
-				-- 可以在这里配置内存布局图的样式，通常用默认的即可
 				inlay_hints = {
 					inline = false,
+				},
+				-- 可选：配置内存视图的颜色，默认即可
+				memory_usage = {
+					border = "none",
+				},
+				-- 可选：配置符号图的样式
+				symbol_info = {
+					border = "none",
 				},
 			})
 		end,
