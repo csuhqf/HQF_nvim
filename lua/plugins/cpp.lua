@@ -8,7 +8,7 @@ return {
 		config = function()
 			require("clangd_extensions").setup({
 				inlay_hints = {
-					inline = false,
+					inline = true, -- 可选：是否将内联提示显示在代码行内，默认 false
 				},
 				-- 可选：配置内存视图的颜色，默认即可
 				memory_usage = {
