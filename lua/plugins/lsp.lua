@@ -25,6 +25,7 @@ return {
 					"black",
 					"isort",
 					"prettier", -- 格式化工具
+					"clang-format", -- C/C++ 格式化工具
 				},
 			})
 
@@ -42,6 +43,7 @@ return {
 					"cssls",
 					"emmet_language_server",
 					"ts_ls",
+					"clangd",
 				},
 				handlers = {
 					-- A. 默认处理器
@@ -80,6 +82,24 @@ return {
 						require("lspconfig").ts_ls.setup({
 							capabilities = capabilities,
 							-- 只要是 js/ts/jsx/tsx 它都会工作
+						})
+					end,
+
+					-- E. C/C++ 配置
+					["clangd"] = function()
+						require("lspconfig").clangd.setup({
+							-- 传递之前定义的 capabilities
+							capabilities = capabilities,
+							-- 关键：配置 clangd 的启动参数
+							cmd = {
+								"clangd",
+								"--background-index",
+								"--header-insertion=never",
+								"--completion-style=detailed", -- 更好的补全信息
+								"-j=4",
+							},
+							-- 确保它只对 C/C++ 文件类型工作
+							filetypes = { "c", "cpp", "cc", "cxx", "h", "hpp" },
 						})
 					end,
 				},
