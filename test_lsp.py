@@ -1,6 +1,8 @@
 import os
 import sys
 
+import matplotlib.pyplot as plt
+
 
 def ugly_function(x, y):
     print(f"hello {x} and {y}")
