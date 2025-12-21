@@ -16,11 +16,6 @@ return {
 					css = { "prettierd" },
 					html = { "prettierd" },
 					json = { "prettierd" },
-					--
-					-- === 新增：C/C++ ===
-					c = { "clang-format" },
-					cpp = { "clang-format" },
-					objc = { "clang-format" }, -- Objective-C (可选)
 				},
 				-- 开启“保存时自动格式化”
 				format_on_save = {

@@ -25,7 +25,6 @@ return {
 					"black",
 					"isort",
 					"prettier", -- 格式化工具
-					"clang-format", -- C/C++ 格式化工具
 				},
 			})
 
@@ -43,7 +42,6 @@ return {
 					"cssls",
 					"emmet_language_server",
 					"ts_ls",
-					"clangd",
 				},
 				handlers = {
 					-- A. 默认处理器
@@ -82,30 +80,6 @@ return {
 						require("lspconfig").ts_ls.setup({
 							capabilities = capabilities,
 							-- 只要是 js/ts/jsx/tsx 它都会工作
-						})
-					end,
-
-					-- E. C/C++ 配置
-					["clangd"] = function()
-						require("lspconfig").clangd.setup({
-							capabilities = capabilities,
-							cmd = {
-								"clangd",
-								"--background-index",
-								"--header-insertion=never",
-								"--completion-style=detailed",
-								"--function-arg-placeholders", -- 补充：函数参数占位符
-								"--fallback-style=llvm",
-								"-j=4",
-								"--offset-encoding=utf-16", -- 【核心修复】防止报错
-							},
-							filetypes = { "c", "cpp", "cc", "cxx", "h", "hpp" },
-
-							-- 如果你想以后用 inlay hints (代码里灰色的类型提示)，可以在这里预留位置
-							-- on_attach = function(client, bufnr)
-							--    require("clangd_extensions.inlay_hints").setup_autocmd()
-							--    require("clangd_extensions.inlay_hints").set_inlay_hints()
-							-- end,
 						})
 					end,
 				},
