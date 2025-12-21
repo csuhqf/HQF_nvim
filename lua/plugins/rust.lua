@@ -1,7 +1,7 @@
 return {
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^5",
+		version = "^6",
 		lazy = false,
 		config = function()
 			vim.g.rustaceanvim = {
@@ -32,7 +32,10 @@ return {
 					default_settings = {
 						["rust-analyzer"] = {
 							cargo = { allFeatures = true },
-							checkOnSave = { command = "clippy" },
+							checkOnSave = true,
+							check = {
+								command = "clippy",
+							},
 							-- 确保 rust-analyzer 本身开启了这个功能
 							lens = {
 								enable = true,
