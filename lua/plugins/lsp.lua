@@ -25,6 +25,7 @@ return {
 					"black",
 					"isort",
 					"prettier", -- 格式化工具
+					"codelldb", -- 调试工具
 				},
 			})
 
@@ -42,10 +43,15 @@ return {
 					"cssls",
 					"emmet_language_server",
 					"ts_ls",
+					"rust_analyzer",
 				},
 				handlers = {
 					-- A. 默认处理器
 					function(server_name)
+						if server_name == "rust_analyzer" then
+							-- rust_analyzer 交给 rustaceanvim 处理
+							return
+						end
 						require("lspconfig")[server_name].setup({
 							capabilities = capabilities,
 						})
